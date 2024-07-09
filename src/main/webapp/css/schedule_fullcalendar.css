@@ -1,0 +1,41 @@
+html {
+	background-image: url(https://image-cdn-flare.qdm.cloud/q591070f643292/image/data/2021/11/05/984e1229607bf04fede13d5e81377def.jpg);
+	background-size: 100%;
+	background-repeat: no-repeat;	
+}
+
+body {
+    width: 54%;
+    margin-left: auto;
+    margin-right: auto;
+	background: white; /* 内容背景颜色 */
+	padding: 40px; /* 增加内边距 */
+	box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); /* 添加阴影使内容更突出 */
+	border-radius: 8px; /* 圆角 */
+}
+    
+body tbody tr{
+    height: 100px;
+}
+
+#backButton {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 9999; /* 确保按钮位于其他元素的上方 */
+	color: black;
+	background: white;
+	border-radius: 3px;
+	padding:8px;
+	text-decoration: none; /* 去掉默认的下划线 */
+}
+
+.fc-event-time {
+    display: none; /* 隐藏时间 */
+}
+
+.hovered {
+    background-color: rgba(0, 0, 0, 0.1); /* 改变背景颜色 */
+    border: 1px solid #ccc; /* 添加边框 */
+    cursor: pointer; /* 改变鼠标指针 */
+}

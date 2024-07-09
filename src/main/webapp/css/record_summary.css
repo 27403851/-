@@ -1,0 +1,72 @@
+.pure-table-bordered tbody tr:last-child {
+        border-bottom: 1px solid #ccc; /* 在tbody的最后一行添加下边框 */
+    }
+    
+html, body {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform: scale(0.9);
+}
+
+body {
+    background-image: url(https://image-cdn-flare.qdm.cloud/q591070f643292/image/data/2021/11/15/3e652fafabeb9e8db1bc6bbfce6acc63.jpg);
+    background-size: 100%;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+body header {
+	width: 420px;
+	max-width: 420px; /* 增加最大宽度 */
+	height: 700px;
+	max-height: 700px;
+	background: white; /* 内容背景颜色 */
+	padding: 40px; /* 增加内边距 */
+	box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); /* 添加阴影使内容更突出 */
+	border-radius: 8px; /* 圆角 */
+}
+
+body header table {
+	width: 425px;
+	max-width: 425px; /* 增加最大宽度 */
+	height: auto;
+	max-height: 520px;
+	text-align: center;
+	margin-bottom: 15px;
+}
+
+body header table thead tr {
+	text-align: center;
+} 
+
+body header table tbody tr {
+	height: 43px;
+}
+
+body header table tfoot{
+	height: 50px;
+	max-height: 50px;
+}
+
+body header section {
+	display: flex;
+	justify-content: space-between;
+}
+
+body header section figure{
+	display: inline-flex;
+	margin: 10px 0px 0px  0px;
+}
+
+body header section figure a {
+	margin-left: 5px;
+}
+
+body header section span {
+	display: inline-flex;
+}

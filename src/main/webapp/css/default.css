@@ -1,0 +1,64 @@
+body, html {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    justify-content: center; /* 水平居中 */
+    align-items: center; /* 垂直居中 */
+    background-color: #f7eddd;
+}
+
+/* 中文字体 */
+.chinese-text {
+    font-family: 'LXGW WenKai Mono TC';
+}
+
+/* 英文字体 */
+.english-text {
+    font-family: 'Roboto Slab';
+}
+
+.center-container {
+    display: flex;
+    justify-content: center; /* 水平居中 */
+    align-items: center; /* 垂直居中 */
+    flex-wrap: wrap; /* 当空间不够时换行 */
+    gap:100px; /* 图片和文字之间的间距 */
+}
+
+.image-link {
+    display: inline-block;
+    position: relative;
+    overflow: hidden;
+    text-align: center; /* 文字居中 */
+}
+
+.image-link img {
+    display: block;
+}
+
+
+.image-link a {
+    text-decoration: none; /* 去掉链接下划线 */
+}
+
+.image-text {
+    margin-top: 10px; /* 文字与图片的间距 */
+    font-size: 18px;
+    color: #333; /* 文字颜色 */
+    margin-top: 40px;
+}
+
+#record {
+    height: 250px;
+    width: 250px;
+}
+
+#calendar {
+    height: 250px;
+    width: 250px;
+}
+
+#learn {
+    height: 250px;
+    width: 260px;
+}

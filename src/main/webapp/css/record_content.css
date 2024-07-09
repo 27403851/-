@@ -1,0 +1,40 @@
+section {
+	margin-left: 70px;
+	text-align: center;
+	background-color: #ffffff;
+	box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); /* 添加阴影使内容更突出 */
+	border-radius: 8px; /* 圆角 */
+}
+
+section fieldset {
+	border: none; /* 移除 fieldset 边框 */
+	padding: 0; /* 移除 fieldset 内边距 */
+	width: 870px;
+	height: 820px;
+}
+
+section table {
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 20px;
+}
+
+section thead tr{
+	text-align: center;
+}
+
+section span a{
+	text-decoration-line: none;
+	margin-left: 5px;
+}
+
+.note {
+    width: 16ch; /* 这里设置8个中文字符的宽度，一个中文字符大约占用2个ch宽度 */
+    overflow-wrap: break-word; /* 如果单词过长，允许它换行 */
+    word-break: break-all; /* 强制换行 */
+    white-space: normal; /* 允许文本换行 */
+}
+
+#gopage{
+	margin: 0px;
+}

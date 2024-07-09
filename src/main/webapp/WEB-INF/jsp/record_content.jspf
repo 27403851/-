@@ -1,0 +1,161 @@
+<%@ page import="record.model.Record"%>
+<%@ page import="java.util.List"%>
+<%@ page import="java.util.ArrayList"%>
+<%@ page import="java.text.SimpleDateFormat"%>
+<%@ page import="java.util.Collections"%>
+<%@ page import="java.util.Comparator"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
+
+
+<%
+    List<Record> records = (List<Record>)request.getAttribute("records");
+    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+    
+    // 根據 CostDate 進行排序，日期越近期的排在越前面
+    Collections.sort(records, new Comparator<Record>() {
+        public int compare(Record r1, Record r2) {
+            return r2.getCostDate().compareTo(r1.getCostDate());
+        }
+    });
+    
+    // 分頁相關設定
+    int pageSize = 10;
+    int totalRecords = records.size();
+    int totalPages = (int) Math.ceil((double) totalRecords / pageSize);
+    int currentPage = request.getParameter("page") != null ? Integer.parseInt(request.getParameter("page")) : 1;
+    int startRecordIndex = (currentPage - 1) * pageSize;
+    int endRecordIndex = Math.min(startRecordIndex + pageSize, totalRecords);
+
+    List<Record> currentPageRecords = records.subList(startRecordIndex, endRecordIndex);
+ 	
+    // 自動遞補的 ID 變數
+    int autoIncrementId = startRecordIndex + 1;
+	
+%>
+
+
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/pure-min.css">
+		<link rel="stylesheet" href="/JavaWeb/css/buttons.css">
+		<link rel="stylesheet" href="/JavaWeb/css/record_content.css">
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">		
+		<link href="images/pig.ico" rel="shortcut icon"/>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+	</head>
+	
+	<body>
+		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+		
+		<script>
+        function confirmDelete(deleteUrl) {
+            Swal.fire({
+                title: '確定要刪除這條記錄嗎？',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: '是的，刪除它！',
+                cancelButtonText: '取消'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = deleteUrl;
+                }
+            });
+            return false;
+        }
+    	</script>
+    
+		<!-- 項目支出表 -->
+		<section class="pure-form">
+		    <fieldset>
+		        <h2>項目支出表</h2>
+		        <table class="pure-table pure-table-bordered">
+		            <thead>
+		                <tr>
+		                    <th>編號</th>
+		                    <th>種類</th>
+		                    <th>收支</th>
+		                    <th>收支日期</th>
+		                    <th>更新</th>
+		                    <th>刪除</th>
+		                    <th>備註</th>
+		                </tr>
+		            </thead>
+		            <tbody>
+	                <% for(Record rd : currentPageRecords) { %>
+	                    <tr>
+	                        <td><%= autoIncrementId++ %></td>
+	                        <td><%= rd.getType() %></td>
+	                        <td><%= rd.getCost() %></td>
+	                        <td><%= rd.getCostDate() != null ? dateFormat.format(rd.getCostDate()) : "" %></td>
+	                        <td><a href="/JavaWeb/record/update?updateId=<%= rd.getId() %>" class="button-warning pure-button">更新</a></td>
+	                        <td><a href="javascript:void(0);" class="button-error pure-button" onclick="return confirmDelete('/JavaWeb/record?deleteId=<%= rd.getId() %>');">刪除</a></td>
+	                        <td class="note"><%= rd.getContent() != null ? rd.getContent() : "" %></td>
+	                   <!-- <td><%= rd.getUpdateDate() != null ? dateFormat.format(rd.getUpdateDate()) : "" %></td> -->        
+	                    </tr>
+	                <% } %>
+		            </tbody>
+		        </table>
+		
+	<!-- 分頁按鈕、連結 -->
+		        <span >
+					<ul class="pagination justify-content-center">
+		                <% if (currentPage > 1) { %>
+		                    <li class="page-item">
+		                        <a class="page-link" href="?page=<%= currentPage - 1 %>" aria-label="Previous">
+		                            <span aria-hidden="true">&laquo; 前一頁</span>
+		                        </a>
+		                    </li>
+		                <% } %>
+		                
+		                <% 
+		                    int startPage = Math.max(1, currentPage - 1);
+		                    int endPage = Math.min(totalPages, currentPage + 1);
+		                %>
+		                
+		                <% if (startPage > 1) { %>
+		                    <li class="page-item">
+		                        <a class="page-link" href="?page=1">1</a>
+		                    </li>
+		                    <% if (startPage > 2) { %>
+		                        <li class="page-item disabled"><span class="page-link">...</span></li>
+		                    <% } %>
+		                <% } %>
+		                
+		                <% for (int i = startPage; i <= endPage; i++) { %>
+		                    <li class="page-item <%= i == currentPage ? "active" : "" %>">
+		                        <a class="page-link" href="?page=<%= i %>"><%= i %></a>
+		                    </li>
+		                <% } %>
+		                
+		                <% if (endPage < totalPages) { %>
+		                    <% if (endPage < totalPages - 1) { %>
+		                        <li class="page-item disabled"><span class="page-link">...</span></li>
+		                    <% } %>
+		                    <li class="page-item">
+		                        <a class="page-link" href="?page=<%= totalPages %>"><%= totalPages %></a>
+		                    </li>
+		                <% } %>
+		                
+		                <% if (currentPage < totalPages) { %>
+		                    <li class="page-item">
+		                        <a class="page-link" href="?page=<%= currentPage + 1 %>" aria-label="Next">
+		                            <span aria-hidden="true">下一頁 &raquo;</span>
+		                        </a>
+		                    </li>
+		                <% } %>      
+		                
+		                <form method="get" class="form-inline"">
+		                	<label id="gopage">　前往第<input type="text" size="1" name="page" onkeyup="return keynum1(this,value)">頁</label>
+		            	</form>          
+		            </ul>
+				</span>		        
+		    </fieldset> 
+		</section>
+		
+	</body>
+</html>

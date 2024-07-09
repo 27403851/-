@@ -1,0 +1,55 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+body {
+    background-image: url(https://image-cdn-flare.qdm.cloud/q591070f643292/image/data/2021/11/15/3e652fafabeb9e8db1bc6bbfce6acc63.jpg);
+    background-size: 100%;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+body form {
+    width: 350px;
+    max-width: 350px; /* 增加最大宽度 */
+    height: 430px;
+    max-height: 500px;
+    background: white; /* 内容背景颜色 */
+    padding: 40px 40px 40px 40px; /* 增加内边距 */
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); /* 添加阴影使内容更突出 */
+    border-radius: 8px; /* 圆角 */
+      
+}
+
+body form legend{
+	font-size: 24px;
+	font-weight: 600;
+}
+
+body section {
+	margin-top: 10px;
+	text-align: center;
+}
+
+body section input[type="date"] {
+	width:70%
+}
+
+body section textarea  {
+	width:216px;
+}
+
+body div  {
+	text-align: end;
+	padding-right:70px;
+}
+
+body form button {
+	margin-left: 10px;
+}

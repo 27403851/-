@@ -1,0 +1,91 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #6b9cb7;
+}
+
+input[readonly] {
+    background-color: #f2f2f2; /* 设置灰色背景色 */
+    color: #333; /* 设置字体颜色 */
+}
+
+#form1 {
+    width: 360px;
+    max-width: 360px;
+    height: 400px;
+    max-height: 400px;
+    background: white;
+    padding: 40px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+#form1 div {
+    margin-top: 12px;
+}
+
+#form2 {
+    width: 360px;
+    max-width: 360px;
+    height: 400px;
+    max-height: 400px;
+    background: white;
+    padding: 40px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    margin-left:50px;
+}
+
+form {
+    text-align: center;
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 10px;
+    margin-top: 0px;
+    font-size: 30px;
+}
+
+hr {
+    margin-bottom: 30px;
+    width: 360px;
+}
+
+input {
+    margin-left: 20px;
+    margin-bottom: 10px;
+    width: 200px;
+}
+
+select {
+    margin-left: 20px;
+    margin-bottom: 10px;
+    width: 200px;
+}
+
+div {
+    margin-top: 30px;
+}
+
+aside {
+    position: fixed; 
+    bottom: 15px;   
+    right: 15px;  
+}
+
+aside a.pure-button {
+    padding: 0;
+    background-color: transparent;
+    border-radius: 50%;
+    width: 60px; 
+    height: 60px;     
+}
+
+#buttonset{
+    margin:3px;
+}

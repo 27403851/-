@@ -1,0 +1,146 @@
+<%@page import="record.model.Record"%>
+<%@ page import="java.util.List"%>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="java.util.Map"%>
+<%@ page import="java.util.HashMap"%>
+<%@ page import="java.util.Collections"%>
+<%@ page import="java.util.Comparator"%>
+<%@ page import="java.text.SimpleDateFormat"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
+<%
+    // 获取从请求中传递过来的记录列表
+    List<Record> recordList = (List<Record>) request.getAttribute("records");
+    Map<String, Map<String, Integer>> monthlyContentCostMap = new HashMap<>();
+    Map<String, Integer> monthlyTotalCostMap = new HashMap<>();
+    int totalCost = 0;
+
+    // 对记录进行按月分组和合并
+    if (recordList != null) {
+        for (Record rd : recordList) {
+            String month = new SimpleDateFormat("yyyy-MM").format(rd.getCostDate());
+            Map<String, Integer> contentCostMap = monthlyContentCostMap.getOrDefault(month, new HashMap<>());
+            String content = rd.getType();
+            int cost = rd.getCost();
+            contentCostMap.put(content, contentCostMap.getOrDefault(content, 0) + cost);
+            monthlyContentCostMap.put(month, contentCostMap);
+
+            // 计算每个月的总成本
+            int monthTotalCost = monthlyTotalCostMap.getOrDefault(month, 0);
+            monthlyTotalCostMap.put(month, monthTotalCost + cost);
+            totalCost += cost; // 更新總成本
+        }
+    }
+
+    // 获取筛选出来的月份
+    String selectedMonth = request.getParameter("selectedMonth");
+    
+    // 对月份按照日期进行排序
+    List<String> sortedMonths = new ArrayList<>(monthlyContentCostMap.keySet());
+    Collections.sort(sortedMonths, new Comparator<String>() {
+        public int compare(String o1, String o2) {
+            return o1.compareTo(o2);
+        }
+    });
+%>
+
+<!-- 添加内嵌的CSS样式 -->
+<style>
+    .pure-table-bordered tbody tr:last-child {
+        border-bottom: 1px solid #ccc; /* 在tbody的最后一行添加下边框 */
+    }
+    
+    .button-success, .button-error, .button-warning, .button-secondary {
+        color: white;
+        border-radius: 4px;
+        text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+    }
+    
+    .button-success {
+        background: rgb(28, 184, 65);
+        /* this is a green */
+    }
+    
+    .button-error {
+        background: rgb(202, 60, 60);
+        /* this is a maroon */
+    }
+    
+    .button-warning {
+        background: rgb(223, 117, 20);
+        /* this is an orange */
+    }
+    
+    .button-secondary {
+        background: rgb(66, 184, 221);
+        /* this is a light blue */
+    }
+</style>
+
+<!-- 记录列表 -->
+<div class="pure-form">
+    <fieldset>
+        <h2>統計結果</h2>
+        <form action="" method="get">
+            <label for="monthSelect">Select Month:</label>
+            <select id="monthSelect" name="selectedMonth">
+                <option value="all" <% if ("all".equals(selectedMonth)) out.println("selected"); %>>All</option>
+                <% for (String month : sortedMonths) { %>
+                    <option value="<%= month %>" <% if (month.equals(selectedMonth)) out.println("selected"); %>><%= month %></option>
+                <% } %>
+            </select>
+            <button type="submit" class="pure-button button-secondary">確認</button>
+        </form><p>
+        <table class="pure-table pure-table-bordered">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Content</th>
+                    <th>Cost</th>
+                    <th>Cost Month</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% 
+                    int idCounter = 1;
+                    if (selectedMonth == null || "all".equals(selectedMonth)) {
+                        // 如果没有选择月份或选择了所有月份，则显示所有记录
+                        for (String month : sortedMonths) { 
+                            Map<String, Integer> contentCostMap = monthlyContentCostMap.get(month);
+                            for (Map.Entry<String, Integer> entry : contentCostMap.entrySet()) { 
+                %>
+                    <tr>
+                        <td><%= idCounter++ %></td>
+                        <td><%= entry.getKey() %></td>
+                        <td><%= entry.getValue() %></td>
+                        <td><%= month %></td>
+                    </tr>
+                <% 
+                            } 
+                        } 
+                    } else {
+                        // 如果选择了特定月份，则显示该月份的记录
+                        Map<String, Integer> contentCostMap = monthlyContentCostMap.get(selectedMonth);
+                        for (Map.Entry<String, Integer> entry : contentCostMap.entrySet()) { 
+                %>
+                    <tr>
+                        <td><%= idCounter++ %></td>
+                        <td><%= entry.getKey() %></td>
+                        <td><%= entry.getValue() %></td>
+                        <td><%= selectedMonth %></td>
+                    </tr>
+                <% 
+                        } 
+                    } 
+                %>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="2">Total Cost</td>
+                    <td><%= selectedMonth != null && monthlyTotalCostMap.containsKey(selectedMonth) ? monthlyTotalCostMap.get(selectedMonth) : totalCost %></td>
+                    <td></td>
+                </tr>
+            </tfoot>
+        </table>
+    </fieldset>
+</div>

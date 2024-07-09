@@ -1,0 +1,66 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+body {
+    background-image: url(https://image-cdn-flare.qdm.cloud/q591070f643292/image/data/2021/11/05/984e1229607bf04fede13d5e81377def.jpg);
+    background-size: 100%;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+body form {
+    width: 350px;
+    max-width: 350px; /* å¢žåŠ æœ€å¤§å®½åº¦ */
+    height: 500px;
+    max-height: 500px;
+    background: white; /* å†…å®¹èƒŒæ™¯é¢œè‰² */
+    padding: 40px 40px 40px 40px; /* å¢žåŠ å†…è¾¹è· */
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); /* æ·»åŠ é˜´å½±ä½¿å†…å®¹æ›´çªå‡º */
+    border-radius: 8px; /* åœ†è§’ */
+      
+}
+
+body form legend {
+	font-size: 24px;
+	font-weight: 600;
+}
+
+body input {
+	width:235px;
+}
+
+body select {
+	width:235px;
+	
+}
+
+body section {
+	margin-top: 15px;
+	margin-left:24px;
+}
+
+body section textarea  {
+	width:235px;
+}
+
+body section p {
+	margin-top: 30px;
+
+}
+
+body div  {
+	text-align: end;
+	padding-right: 20px;
+}
+
+body a {
+	margin-left:20px;
+}
+

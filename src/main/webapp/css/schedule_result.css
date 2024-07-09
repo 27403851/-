@@ -1,0 +1,42 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+body {
+    background-image: url(https://image-cdn-flare.qdm.cloud/q591070f643292/image/data/2021/11/05/984e1229607bf04fede13d5e81377def.jpg);
+    background-size: 100%;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+body div {
+    width: 260px;
+    max-width: 300px; /* 增加最大宽度 */
+    height: 130px;
+    max-height: 150px;
+    background: white; /* 内容背景颜色 */
+    padding: 30px 40px 40px 40px; /* 增加内边距 */
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); /* 添加阴影使内容更突出 */
+    border-radius: 8px; /* 圆角 */
+}
+
+body div section {
+	text-align: center;
+}
+
+body div legend{
+	font-size: 18px;
+	font-weight: 600;
+}
+
+body div section h3{
+	font-size: 36px;
+	margin-top: 10px;
+	margin-bottom: 15px;
+}

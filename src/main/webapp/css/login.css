@@ -1,0 +1,91 @@
+body {
+    display: flex;
+    justify-content: center; /* 水平居中 */
+            
+    align-items: center; /* 垂直居中 */
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    height: 100vh;
+    margin: 0;
+}
+
+div {
+    margin-left: auto;
+    margin-right: auto;
+    width: 400px;
+    height:450px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    text-align: center;
+    margin-top: 50px; /* 调整标题与框框之间的距离 */
+}
+
+h2 {
+    color: #333;
+    margin: 30px auto 40px auto;
+    text-align: center; /* 居中标题 */
+}
+
+hr {
+    margin-top: -10px;
+    margin-bottom:40px;
+}
+
+label {
+    display: inline-block;
+    text-align: left;
+    width: 100%;
+    margin-left: 40px;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="email"] {
+    width: calc(100% - 100px);
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    font-size: 16px;
+}
+
+input[type="submit"] {
+    background-color: #4CAF50;
+}
+
+input[type="button"] {
+    background-color: #b8b8b8;
+}
+
+input[type="submit"],
+input[type="button"] {
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin-top: 30px;
+    margin-left: 10px;
+    cursor: pointer;
+    border-radius: 3px;
+    transition: background-color 0.3s ease;
+}
+
+input[type="submit"]:hover{
+    background-color: #45a049;
+}
+
+input[type="button"]:hover {
+    background-color: #919191;
+}
+
+p {
+    margin-top: -20px;
+    margin-bottom: 40px;
+}
